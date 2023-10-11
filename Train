@@ -1,0 +1,44 @@
+package lists.exersices;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class train {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> numList = Arrays
+                .stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        int maxCapacity = Integer.parseInt(scanner.nextLine());
+        String input = scanner.nextLine();
+        //72 54 21 12 4 75 23 10 0
+        while (!(input.equals("end"))){
+            if(input.contains("Add")){
+                String[] array = input.split(" ");
+                int travellerToAdd = Integer.parseInt(array[1]);
+
+                numList.add(travellerToAdd);
+            }else{
+                String[] array = input.split(" ");
+                int newTravellerToAdd = Integer.parseInt(array[0]);
+
+                for (int i = 0; i < numList.size(); i++) {
+                    int currentNum = numList.get(i);
+
+                    if(newTravellerToAdd+currentNum<=maxCapacity){
+                        numList.set(i, (newTravellerToAdd+currentNum));
+
+                        break;
+                    }
+                }
+            }
+            input = scanner.nextLine();
+        }
+            for (int el:numList){
+                System.out.print(el + " ");
+            }
+    }
+}
